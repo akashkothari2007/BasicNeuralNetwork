@@ -1,0 +1,24 @@
+Neural networks
+FOR SINGLE IMAGE FIRST
+1) Processes image, each pixel is assigned a value from 0 - 1 (grayscale), called activation -> each is a neuron
+inputs = these activation numbers, the first layer of neurons
+2) Next layers (hidden layers) all have any amount of neurons you choose (optimize depending on task), 
+Every value of the neuron is set to 0 
+3) Each neuron in the first layer (input) 'fires' at each neuron in the second layer. 
+-> Each neuron in the second layer's value is each neuron in the first layer's activation numbers
+   multiplied by a random weight (different in every neuron), and added together. Then a bias value is added, unique for every neuron.
+4) This process keeps repeating across layers, with each neuron layer values being inputs to the next layer.
+5) For the end layer you can choose how many neurons you want, for example you could pick 2, one meaning cats, the other meaning dogs
+6) When the process continued from 4) reaches the end layer it spews its outputs from the usual calculations into the 2 final neurons
+   and an activation function such as signum would bring it between 0 and 1. The neuron with greater value is the chosen answer, so cat or dog.
+7) Now there is nothing here but just the math with random weights it has no way of knowing, it hasn't gotten to the 'learning' part yet.
+   We take the values in the final layer of neurons and apply a cost function to it, to get well the cost
+   -> in the cost function we input the values and the desired output (dog for example), and we get a value of the cost
+   -> which is how far off it is. 
+8) The goal from here is to minimize this cost, get it as close as possible to 0 or minimize this cost function. But we need more than one input, otherwise it would learn to always say dog
+   So we send a batch of hundreds or thousands of images as inputs, and get the average of all of these costs to determine the cost
+   From here we do a gradient descent, which is at a high level changing weights, especially the larger weights, to drop the average cost over the next batch
+   And this keeps repeating, like a ball rolling down a hill, until it settles at a local minimum.
+   The way this is done is through backwards propogation
+   Now this means it finds the weights which result in the least error through the entire batch.
+   Now we test with external data, non labelled and things it has not seen before. 
