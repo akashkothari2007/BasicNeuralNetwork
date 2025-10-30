@@ -90,7 +90,7 @@ learning_rate = 1.0
 epochs = 5000
 
 for epoch in range(epochs):
-    # -------- Forward Pass --------
+    # forward pass
     inputs = X
     for layer in layers:
         layer.forward(inputs)
@@ -100,7 +100,7 @@ for epoch in range(epochs):
     predictions = layers[-1].output
     loss = np.mean((desiredOutputs - predictions) ** 2)
 
-    # -------- Backward Pass --------
+    # goes backward 
     dvalues = -2 * (desiredOutputs - predictions) / batchSize
 
     for layer_i in reversed(range(len(layers))):
@@ -110,12 +110,12 @@ for epoch in range(epochs):
         layer.backward(dactivation)
         dvalues = layer.dinputs  # pass gradients back
 
-    # -------- Update Weights --------
+    # update weights based on derivatives
     for layer in layers:
         layer.weights -= learning_rate * layer.dweights
         layer.biases -= learning_rate * layer.dbiases
 
-    # -------- Print Progress --------
+    # print the loss/ cost every hundred loops
     if epoch % 100 == 0:
         print(f"Epoch {epoch}, Loss: {loss:.4f}")
 
